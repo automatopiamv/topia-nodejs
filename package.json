@@ -1,0 +1,24 @@
+{
+  "name": "topia-nodejs",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "description": "Topia SDK for NodeJS. Currently in development and not ready for deployment.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/automatopiamv/topia-nodejs"
+  },
+  "author": {
+    "name": "Topia",
+    "url": "https://topia.io"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["topia","ar","vr","topia sdk"],
+  "license": "MIT"
+}
