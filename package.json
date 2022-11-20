@@ -1,10 +1,10 @@
 {
   "name": "topia-nodejs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "type": "module",
   "description": "Topia SDK for NodeJS. Currently in development and not ready for deployment.",
-  "main": "index.js",
+  "main": "index.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/automatopiamv/topia-nodejs"
@@ -16,6 +16,7 @@
   "dependencies": {
     "node-fetch": "^3.3.0"
   },
+  "types": "./@types/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

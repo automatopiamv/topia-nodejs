@@ -1,5 +1,5 @@
 import fetch from 'node-fetch'
-import {Asset, WorldAsset} from "./topia-models";
+import {Asset, WorldAsset} from "../@types";
 
 const host = 'https://api.topia.io/api'
 let apiKey: string | undefined
