@@ -1,3 +1,5 @@
+import topiaApi from "../src/topia.api";
+
 type Asset = {
     id: string,
     assetName: string,
@@ -52,4 +54,17 @@ type WorldAsset = {
     isVideo: string
 }
 
+export interface TopiaApi {
+    setApiKey(key: string): void,
+
+    assets: {
+        get(library: 'my' | 'topia', email: string): Promise<Asset[]>
+    },
+
+    world: {
+        getAssets(worldSlug: string, email: string): Promise<WorldAsset[]>
+    }
+}
+
 export type {Asset, WorldAsset}
+export default topiaApi

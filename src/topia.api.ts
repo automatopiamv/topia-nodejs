@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {Asset, WorldAsset} from "../@types";
+import {Asset, TopiaApi, WorldAsset} from "../@types";
 
 let apiKey: string | undefined
 const headers = {Authorization: "", 'Content-Type': 'application/json'}
@@ -10,7 +10,7 @@ const instance = axios.create({
     responseType: "json"
 });
 
-const topiaApi = {
+const topiaApi : TopiaApi = {
     setApiKey: (key: string) => {
         apiKey = key
         headers.Authorization = apiKey
