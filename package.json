@@ -14,7 +14,7 @@
     "url": "https://topia.io"
   },
   "dependencies": {
-    "node-fetch": "^3.3.0"
+    "axios": "^1.2.0"
   },
   "types": "./@types/index.d.ts",
   "scripts": {
