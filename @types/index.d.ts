@@ -54,6 +54,15 @@ type WorldAsset = {
     isVideo: string
 }
 
+type DropAssetRequest = {
+    assetId: string,
+    position: {
+        x: number,
+        y: number
+    },
+    uniqueName: string
+}
+
 export interface TopiaApi {
     setApiKey(key: string): void,
 
@@ -63,8 +72,9 @@ export interface TopiaApi {
 
     world: {
         getAssets(worldSlug: string, email: string): Promise<WorldAsset[]>
+        dropAsset(worldSlug: string, assetDrop: DropAssetRequest): Promise<WorldAsset>
     }
 }
 
-export type {Asset, WorldAsset}
+export type {Asset, WorldAsset, DropAssetRequest}
 export default topiaApi

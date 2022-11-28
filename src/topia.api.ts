@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {Asset, TopiaApi, WorldAsset} from "../@types";
+import {Asset, DropAssetRequest, TopiaApi, WorldAsset} from "../@types";
 
 let apiKey: string | undefined
 const headers = {Authorization: "", 'Content-Type': 'application/json'}
@@ -23,7 +23,10 @@ const topiaApi : TopiaApi = {
 
     world: {
         getAssets: async (worldSlug: string, email: string): Promise<WorldAsset[]> =>
-            instance.get<any, WorldAsset[]>(`/world/${worldSlug}/assets`, {headers, params: {email}})
+            instance.get<any, WorldAsset[]>(`/world/${worldSlug}/assets`, {headers, params: {email}}),
+
+        dropAsset: async (worldSlug: string, assetDrop: DropAssetRequest) =>
+            instance.post<DropAssetRequest, WorldAsset>(`/world/${worldSlug}/assets`, assetDrop, {headers})
     }
 }
 
