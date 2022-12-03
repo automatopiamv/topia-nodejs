@@ -1,4 +1,4 @@
-import axios, {AxiosRequestConfig} from 'axios'
+import axios, {AxiosRequestConfig, AxiosResponse} from 'axios'
 import {Asset, DropAssetRequest, TopiaApi, WorldAsset} from "../@types";
 
 const instance = axios.create({
@@ -20,15 +20,15 @@ const topiaApi: TopiaApi = {
 
     assets: {
         get: async (library: 'my' | 'topia', email: string): Promise<Asset[]> =>
-            instance.get<any, Asset[]>(`/assets/${library}-assets`, {..._config, ...{params: {email}}})
+            (await instance.get<Asset[]>(`/assets/${library}-assets`, {..._config, ...{params: {email}}})).data
     },
 
     world: {
         getAssets: async (worldSlug: string, email: string): Promise<WorldAsset[]> =>
-            instance.get<any, WorldAsset[]>(`/world/${worldSlug}/assets`, {..._config, ...{params: {email}}}),
+            (await instance.get<WorldAsset[]>(`/world/${worldSlug}/assets`, {..._config, ...{params: {email}}})).data,
 
         dropAsset: async (worldSlug: string, assetDrop: DropAssetRequest) =>
-            instance.post<DropAssetRequest, WorldAsset>(`/world/${worldSlug}/assets`, assetDrop, _config)
+            (await instance.post<WorldAsset, AxiosResponse<WorldAsset, DropAssetRequest>, DropAssetRequest>(`/world/${worldSlug}/assets`, assetDrop, _config)).data
     }
 }
 
