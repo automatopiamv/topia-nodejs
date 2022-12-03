@@ -63,6 +63,43 @@ type DropAssetRequest = {
     uniqueName: string
 }
 
+type Media = {
+    id:	string
+    uniqueItems: true
+    type:	string
+    size: number
+    mediaPath:	string
+    duration: number
+}
+
+type WhitelistItem = {
+    email: string
+    firstName?: string
+    lastName?: string
+    displayName?: string
+}
+
+type Scene =  {
+    id: string,
+    height: number,
+    width: number,
+    background: string,
+    name: string,
+    spawnPosition: {
+        x: number,
+        y: number,
+        radius: number
+    },
+    timesUsed: number,
+    description: string,
+    urlSlug: string,
+    created: {
+        _seconds: number,
+        _nanoseconds: number
+    },
+    worldCenteredAtZero: boolean
+}
+
 export interface TopiaApi {
     config(config: {key: string, timeout?:number}): void,
 
@@ -70,11 +107,33 @@ export interface TopiaApi {
         get(library: 'my' | 'topia', email: string): Promise<Asset[]>
     },
 
+    media: {
+        get(worldSlug:string): Promise<Media[]>
+    },
+
+    whitelist: {
+        get(worldSlug:string) : Promise<WhitelistItem[]>,
+        replace(worldSlug:string, newList : WhitelistItem[]) : Promise<WhitelistItem[]>,
+        add(worldSlug:string, newItems: WhitelistItem[]) : Promise<WhitelistItem[]>,
+    },
+
+    /**
+     * Currently disabled
+     */
+    users: {
+
+    },
+    scene: {
+        get(library: "my"|"topia", email:string): Promise<Scene[]>
+    },
+    webhook:{},
+    visitors:{},
+
     world: {
         getAssets(worldSlug: string, email: string): Promise<WorldAsset[]>
         dropAsset(worldSlug: string, assetDrop: DropAssetRequest): Promise<WorldAsset>
     }
 }
 
-export type {Asset, WorldAsset, DropAssetRequest}
+export type {Asset, WorldAsset, DropAssetRequest, Media, WhitelistItem, Scene}
 export default topiaApi
