@@ -1,8 +1,5 @@
-import axios from 'axios'
+import axios, {AxiosRequestConfig} from 'axios'
 import {Asset, DropAssetRequest, TopiaApi, WorldAsset} from "../@types";
-
-let apiKey: string | undefined
-const headers = {Authorization: "", 'Content-Type': 'application/json'}
 
 const instance = axios.create({
     baseURL: 'https://api.topia.io/api',
@@ -10,23 +7,28 @@ const instance = axios.create({
     responseType: "json"
 });
 
-const topiaApi : TopiaApi = {
-    setApiKey: (key: string) => {
-        apiKey = key
-        headers.Authorization = apiKey
+const _config: AxiosRequestConfig = {headers: {Authorization: "", 'Content-Type': 'application/json'}}
+
+const topiaApi: TopiaApi = {
+    config: (config) => {
+        if (config.key)
+            _config.headers!.Authorization = config.key
+
+        if (config.timeout)
+            _config.timeout = config.timeout
     },
 
     assets: {
         get: async (library: 'my' | 'topia', email: string): Promise<Asset[]> =>
-            instance.get<any, Asset[]>(`/assets/${library}-assets`, {headers, params: {email}})
+            instance.get<any, Asset[]>(`/assets/${library}-assets`, {..._config, ...{params: {email}}})
     },
 
     world: {
         getAssets: async (worldSlug: string, email: string): Promise<WorldAsset[]> =>
-            instance.get<any, WorldAsset[]>(`/world/${worldSlug}/assets`, {headers, params: {email}}),
+            instance.get<any, WorldAsset[]>(`/world/${worldSlug}/assets`, {..._config, ...{params: {email}}}),
 
         dropAsset: async (worldSlug: string, assetDrop: DropAssetRequest) =>
-            instance.post<DropAssetRequest, WorldAsset>(`/world/${worldSlug}/assets`, assetDrop, {headers})
+            instance.post<DropAssetRequest, WorldAsset>(`/world/${worldSlug}/assets`, assetDrop, _config)
     }
 }
 

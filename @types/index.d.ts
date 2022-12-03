@@ -64,7 +64,7 @@ type DropAssetRequest = {
 }
 
 export interface TopiaApi {
-    setApiKey(key: string): void,
+    config(config: {key: string, timeout?:number}): void,
 
     assets: {
         get(library: 'my' | 'topia', email: string): Promise<Asset[]>
