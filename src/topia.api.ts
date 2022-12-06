@@ -19,6 +19,8 @@ const topiaApi: TopiaApi = {
     },
 
     assets: {
+        getById: async (id: string) => (await instance.get<Asset>(`/assets/${id}`, _config)).data,
+
         get: async (library: 'my' | 'topia', email: string) =>
             (await instance.get<Asset[]>(`/assets/${library}-assets`, {..._config, ...{params: {email}}})).data
     },
@@ -51,6 +53,13 @@ const topiaApi: TopiaApi = {
     },
 
     world: {
+        clear: async (worldSlug: string, email: string) => {
+            // get all, then delete one-by-one
+            const worldAssets = await topiaApi.world.getAssets(worldSlug, email)
+            for(let wa of worldAssets)
+                await instance.delete(`/world/${worldSlug}/assets/${wa.id}`)
+        },
+
         getAssets: async (worldSlug: string, email: string) =>
             (await instance.get<WorldAsset[]>(`/world/${worldSlug}/assets`, {..._config, ...{params: {email}}})).data,
 

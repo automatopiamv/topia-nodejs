@@ -16,7 +16,7 @@ type WorldAsset = {
     assetName: string,
     assetScale: number,
     assetBroadcast: boolean,
-    assetBroadcastAll: true,
+    assetBroadcastAll: boolean,
     broadcasterEmail: string,
     audioRadius: number,
     audioVolume: number,
@@ -51,7 +51,7 @@ type WorldAsset = {
     uniqueName: string,
     mediaName: string,
     isMutezone: boolean,
-    isVideo: string
+    isVideo: boolean
 }
 
 type DropAssetRequest = {
@@ -104,6 +104,7 @@ export interface TopiaApi {
     config(config: {key: string, timeout?:number}): void,
 
     assets: {
+        getById(id: string): Promise<Asset>
         get(library: 'my' | 'topia', email: string): Promise<Asset[]>
     },
 
@@ -131,7 +132,18 @@ export interface TopiaApi {
 
     world: {
         getAssets(worldSlug: string, email: string): Promise<WorldAsset[]>
+        /**
+         * Drop an asset in the world
+         *
+         * @param worldSlug
+         * @param assetDrop
+         */
         dropAsset(worldSlug: string, assetDrop: DropAssetRequest): Promise<WorldAsset>
+
+        /**
+         * Remove all the assets from a world
+         */
+        clear(worldSlug: string, email: string): Promise<void>
     }
 }
 
