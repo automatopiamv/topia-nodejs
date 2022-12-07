@@ -66,14 +66,14 @@ const topiaApi: TopiaApi = {
         dropAsset: async (worldSlug: string, assetDrop: DropAssetRequest) =>
             (await instance.post<WorldAsset, AxiosResponse<WorldAsset, DropAssetRequest>, DropAssetRequest>(`/world/${worldSlug}/assets`, assetDrop, _config)).data,
 
-        deleteAsset: async (worldSlug, email, worldAssetId, assetId) =>
-            instance.delete(`/world/${worldSlug}/assets/${worldAssetId}${assetId}`, {..._config, ...{params: {email}}}),
+        deleteAsset: async (worldSlug, email, worldAssetId) =>
+            instance.delete(`/world/${worldSlug}/assets/${worldAssetId}`, {..._config, ...{params: {email}}}),
 
-        moveAsset: async (worldSlug, email, worldAssetId, assetId, position) =>
-            instance.put(`/world/${worldSlug}/assets/${worldAssetId}${assetId}/set-position`, position, {..._config, ...{params: {email}}}),
+        moveAsset: async (worldSlug, email, worldAssetId, position) =>
+            instance.put(`/world/${worldSlug}/assets/${worldAssetId}/set-position`, position, {..._config, ...{params: {email}}}),
 
-        scaleAsset: async (worldSlug, email, worldAssetId, assetId, scale) =>
-            instance.put(`/world/${worldSlug}/assets/${worldAssetId}${assetId}/change-scale`, {assetScale: scale}, {..._config, ...{params: {email}}})
+        scaleAsset: async (worldSlug, email, worldAssetId, scale) =>
+            instance.put(`/world/${worldSlug}/assets/${worldAssetId}/change-scale`, {assetScale: scale}, {..._config, ...{params: {email}}})
     }
 }
 
