@@ -144,9 +144,10 @@ export interface TopiaApi {
          * Remove a placed asset
          *
          * @param worldSlug
-         * @param worldAssetId
+         * @param email     Email address of the world-owner
+         * @param id        worldAssetId followed by assetId
          */
-        deleteAsset(worldSlug: string, worldAssetId: string)
+        deleteAsset(worldSlug: string, email: string, id: string)
 
         /**
          * Remove all the assets from a world
