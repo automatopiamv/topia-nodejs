@@ -144,21 +144,24 @@ export interface TopiaApi {
          * Remove a placed asset
          *
          * @param worldSlug
-         * @param email     Email address of the world-owner
-         * @param id        worldAssetId followed by assetId
+         * @param email         Email address of the world-owner
+         * @param worldAssetId
+         * @param assetId
          */
-        deleteAsset(worldSlug: string, email: string, id: string)
+        deleteAsset(worldSlug: string, email: string, worldAssetId: string, assetId: string)
 
-        moveAsset(worldSlug: string, email: string, id: string, position: {x:number, y:number})
+
+        moveAsset(worldSlug: string, email: string, worldAssetId: string, assetId: string, position: {x:number, y:number})
 
         /**
          *
          * @param worldSlug
-         * @param email     Email address of the world-owner
-         * @param id        worldAssetId followed by assetId
-         * @param scale     Number between 0 and 1
+         * @param email         Email address of the world-owner
+         * @param worldAssetId
+         * @param assetId
+         * @param scale         Number between 0 and 1
          */
-        scaleAsset(worldSlug:string, email:string, id:string, scale:number)
+        scaleAsset(worldSlug:string, email:string, worldAssetId: string, assetId: string, scale:number)
 
         /**
          * Remove all the assets from a world
