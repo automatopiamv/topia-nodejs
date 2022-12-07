@@ -149,6 +149,17 @@ export interface TopiaApi {
          */
         deleteAsset(worldSlug: string, email: string, id: string)
 
+        moveAsset(worldSlug: string, email: string, id: string, position: {x:number, y:number})
+
+        /**
+         *
+         * @param worldSlug
+         * @param email     Email address of the world-owner
+         * @param id        worldAssetId followed by assetId
+         * @param scale     Number between 0 and 1
+         */
+        scaleAsset(worldSlug:string, email:string, id:string, scale:number)
+
         /**
          * Remove all the assets from a world
          */
