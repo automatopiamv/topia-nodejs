@@ -141,6 +141,14 @@ export interface TopiaApi {
         dropAsset(worldSlug: string, assetDrop: DropAssetRequest): Promise<WorldAsset>
 
         /**
+         * Remove a placed asset
+         *
+         * @param worldSlug
+         * @param worldAssetId
+         */
+        deleteAsset(worldSlug: string, worldAssetId: string)
+
+        /**
          * Remove all the assets from a world
          */
         clear(worldSlug: string, email: string): Promise<void>

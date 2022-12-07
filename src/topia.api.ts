@@ -64,7 +64,10 @@ const topiaApi: TopiaApi = {
             (await instance.get<WorldAsset[]>(`/world/${worldSlug}/assets`, {..._config, ...{params: {email}}})).data,
 
         dropAsset: async (worldSlug: string, assetDrop: DropAssetRequest) =>
-            (await instance.post<WorldAsset, AxiosResponse<WorldAsset, DropAssetRequest>, DropAssetRequest>(`/world/${worldSlug}/assets`, assetDrop, _config)).data
+            (await instance.post<WorldAsset, AxiosResponse<WorldAsset, DropAssetRequest>, DropAssetRequest>(`/world/${worldSlug}/assets`, assetDrop, _config)).data,
+
+        deleteAsset: async (worldSlug: string, worldAssetId: string) =>
+            instance.delete(`/world/${worldSlug}/assets/${worldAssetId}`, _config)
     }
 }
 
