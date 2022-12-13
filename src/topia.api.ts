@@ -34,7 +34,19 @@ const topiaApi: TopiaApi = {
             (await instance.get<Scene[]>(`/scenes/${library}-scenes`, {..._config, ...{params: {email}}})).data
     },
 
-    users: {},
+    users: {
+        /**
+         * Get all the users in the world or by sessionId. _Currently disabled_.
+         * @param worldSlug
+         * @param sessionId
+         */
+        get: async (worldSlug: string, sessionId?: string) : Promise<{id: number, username:string}[]> => {
+            let url = `/users/${worldSlug}`
+            if(sessionId)
+                url = `${url}/${sessionId}`
+            return (await instance.get(url, _config)).data
+        }
+    },
 
     visitors: {},
 
