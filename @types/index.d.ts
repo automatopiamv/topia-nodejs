@@ -131,7 +131,27 @@ export interface TopiaApi {
     visitors:{},
 
     world: {
+        /**
+         * List all the worlds accessible to the user
+         */
+        list() :Promise<string[]>,
+
+        /**
+         * Get a World Asset by ID
+         * @param worldSlug
+         * @param email
+         * @param worldAssetId
+         */
+        getAsset(worldSlug: string, email: string, worldAssetId: string): Promise<WorldAsset>,
+
+        /**
+         * List all the assets in the given world
+         *
+         * @param worldSlug
+         * @param email
+         */
         getAssets(worldSlug: string, email: string): Promise<WorldAsset[]>
+
         /**
          * Drop an asset in the world
          *
